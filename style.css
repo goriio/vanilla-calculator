@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --background: #2d3436;
+  --foreground: #dfe6e9;
+  --primary: #0984e3;
+
+  --text-primary: #2d3436;
+  --text-gray: #636e72;
+
+  --accent: #fdcb6e;
+
+  --border-radius: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--background);
+}
+
+.span-two-x {
+  grid-column: span 2;
+}
+
+.span-two-y {
+  grid-row: span 2;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.calculator {
+  background: var(--primary);
+  width: 100%;
+  max-width: 300px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.output {
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+  background: var(--foreground);
+  border-radius: var(--border-radius);
+  word-break: break-all;
+}
+
+.previous {
+  min-height: 2rem;
+  color: var(--text-gray);
+  font-size: 1.2rem;
+}
+
+.current {
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 1.75rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.button {
+  padding: 1rem;
+  background: var(--foreground);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  transition: 200ms ease;
+}
+
+.button--accent {
+  background: var(--accent);
+}
+
+.button:hover {
+  opacity: 80%;
+}
+
+.button:active {
+  transform: translateY(2px);
+}
