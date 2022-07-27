@@ -7,33 +7,43 @@ class Calculator {
 
   reset() {
     this.previousOperand = '';
-    this.currentOperand = '';
+    this.currentOperand = '0';
     this.operator = null;
   }
 
   append(number) {
     if (this.currentOperand.length > 12) return;
+    if (this.currentOperand === '0' && number === '0') return;
     if (number === '.' && this.currentOperand.includes('.')) return;
-    if (number === '.') this.currentOperand += '0';
+    if (!(number === '0' || number === '.') && this.currentOperand === '0')
+      this.currentOperand = '';
     this.currentOperand += number;
   }
 
   delete() {
-    this.currentOperand = this.currentOperand.slice(0, -1);
+    this.currentOperand =
+      this.currentOperand.length > 1 ? this.currentOperand.slice(0, -1) : '0';
   }
 
   chooseOperator(operator) {
-    if (!this.currentOperand) return;
+    if (this.operator && this.currentOperand === '0') {
+      this.operator = operator;
+      return;
+    }
+
+    if (this.currentOperand === '0') return;
 
     if (this.previousOperand) this.calculate();
     this.operator = operator;
     this.previousOperand = this.currentOperand;
-    this.currentOperand = '';
+    this.currentOperand = '0';
   }
 
   calculate() {
-    let previousOperand = parseFloat(this.previousOperand) || 0;
-    let currentOperand = parseFloat(this.currentOperand) || 0;
+    if (!this.previousOperand) return;
+
+    let previousOperand = parseFloat(this.previousOperand);
+    let currentOperand = parseFloat(this.currentOperand);
 
     switch (this.operator) {
       case '+':
@@ -50,7 +60,7 @@ class Calculator {
     }
 
     this.reset();
-    this.currentOperand = previousOperand;
+    this.currentOperand = String(previousOperand);
   }
 
   render() {
